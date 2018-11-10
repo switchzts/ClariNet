@@ -244,7 +244,7 @@ def synthesize(model_t, model_s, ema=None):
             z = q_0.sample()
             wav_truth_name = '{}/{}/{}/generate_{}_{}_truth.wav'.format(args.sample_path, args.teacher_name,
                                                                         args.model_name, global_step, batch_idx)
-            librosa.output.write_wav(wav_truth_name, y.squeeze().numpy(), sr=22050)
+            librosa.output.write_wav(wav_truth_name, y.squeeze().numpy(), sr=16000)
             print('{} Saved!'.format(wav_truth_name))
 
             torch.cuda.synchronize()
@@ -258,7 +258,7 @@ def synthesize(model_t, model_s, ema=None):
             wav = y_gen.to(torch.device("cpu")).data.numpy()
             wav_name = '{}/{}/{}/generate_{}_{}.wav'.format(args.sample_path, args.teacher_name,
                                                             args.model_name, global_step, batch_idx)
-            librosa.output.write_wav(wav_name, wav, sr=22050)
+            librosa.output.write_wav(wav_name, wav, sr=16000)
             print('{} Saved!'.format(wav_name))
             del y_gen, wav, x,  y, c, c_up, z, q_0
     del model_s_ema

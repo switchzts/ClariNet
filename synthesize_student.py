@@ -109,7 +109,7 @@ for i, (x, y, c, l) in enumerate(test_loader):
                                                                     args.model_name,
                                                                     args.load_step,
                                                                     i)
-        librosa.output.write_wav(wav_truth_name, y.squeeze().to(torch.device("cpu")).numpy(), sr=22050)
+        librosa.output.write_wav(wav_truth_name, y.squeeze().to(torch.device("cpu")).numpy(), sr=16000)
         torch.cuda.synchronize()
         start_time = time.time()
 
@@ -124,6 +124,6 @@ for i, (x, y, c, l) in enumerate(test_loader):
                                                            args.load_step,
                                                            i,
                                                            args.temp)
-        librosa.output.write_wav(wav_name, wav, sr=22050)
+        librosa.output.write_wav(wav_name, wav, sr=16000)
         print('{} Saved!'.format(wav_name))
 

@@ -90,7 +90,7 @@ for i, (x, y, c, _) in enumerate(test_loader):
         x, c = x.to(device), c.to(device)
 
         wav_truth_name = '{}/{}/generate_{}_{}_truth.wav'.format(args.sample_path, args.model_name, step, i)
-        librosa.output.write_wav(wav_truth_name, y.squeeze().numpy(), sr=22050)
+        librosa.output.write_wav(wav_truth_name, y.squeeze().numpy(), sr=16000)
         torch.cuda.synchronize()
         start_time = time.time()
 
@@ -100,6 +100,6 @@ for i, (x, y, c, _) in enumerate(test_loader):
         print('{} seconds'.format(time.time()-start_time))
         wav = y_gen.numpy()
         wav_name = '{}/{}/generate_{}_{}.wav'.format(args.sample_path, args.model_name, step, i)
-        librosa.output.write_wav(wav_name, wav, sr=22050)
+        librosa.output.write_wav(wav_name, wav, sr=16000)
         del y_gen
 
